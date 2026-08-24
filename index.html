@@ -477,8 +477,8 @@
   /* ---------- Topic explorer ---------- */
   .topic-tabs{
     display:flex;
-    flex-wrap:wrap;
-    gap:8px;
+    flex-direction:column;
+    gap:14px;
     margin-bottom:22px;
   }
   .topic-tab{
@@ -520,6 +520,24 @@
     border:1px solid color-mix(in srgb, var(--accent-2) 35%, transparent);
     color:var(--accent-2);
     white-space:nowrap;
+  }
+  .topic-group{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px;
+    margin-bottom:8px;
+  }
+  .topic-group-label{
+    flex-shrink:0;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--accent-2);
+    padding:8px 10px 8px 0;
+    border-right:1px solid var(--line);
+    margin-right:2px;
   }
   .topic-card .angle{
     margin-top:10px;
@@ -956,7 +974,7 @@
       <div class="hero-meta">
         <div><strong>1 min</strong>prep time</div>
         <div><strong>2 min</strong>speaking time</div>
-        <div><strong>~10</strong>reusable idea-banks</div>
+        <div><strong>11</strong>reusable idea-banks</div>
       </div>
     </div>
     <div class="card-stack" aria-hidden="true">
@@ -1027,7 +1045,7 @@
         <h2>One idea, many cue cards</h2>
       </div>
     </div>
-    <p class="measure" style="color:var(--ink-soft); margin-bottom:22px;">These are the ten idea-banks from the video, in the order he gives them. Pick one, see the angle to take, the questions that expand it, and a worked example using the framework above.</p>
+    <p class="measure" style="color:var(--ink-soft); margin-bottom:22px;">Eleven idea-banks, grouped by the 5 Q-card types a second instructor teaches — person, place, object, experience, activity. Pick one, see the angle to take, the questions that expand it, and a worked example using the framework above.</p>
 
     <div class="topic-tabs" id="topicTabs"></div>
     <div class="topic-panel" id="topicPanel"></div>
@@ -1229,7 +1247,37 @@
       ]
     },
     {
-      key:'school', label:'3 · School / College', subject:"a rule we had to follow at school", qtype:'place',
+      key:'teacher', label:'3 · A Teacher', subject:"my high school chemistry teacher", qtype:'person',
+      angle:"A teacher who genuinely changed how you approached something covers favourite-teacher, someone-who-taught-you-something, and someone-who-influenced-you cards — the classroom setting also makes it easy to add concrete, specific detail.",
+      expand:["What did they actually do differently from other teachers?","Is there one specific lesson or moment that stands out?","How did it change your attitude toward the subject, or beyond it?"],
+      covers:["A teacher you respect","Someone who taught you something","A favourite teacher","Someone who influenced you"],
+      extra:["A teacher you did not like at first","Someone strict who was still fair"],
+      beats:[
+        {k:"Who", v:"my high school chemistry teacher."},
+        {k:"What", v:"turned a subject I was failing into one I actually looked forward to."},
+        {k:"When", v:"over about two years, starting when I was fifteen."},
+        {k:"Where", v:"in a fairly ordinary classroom, nothing special about the setting itself."},
+        {k:"Why", v:"she never just gave answers, she made us work backward from the mistake until we found it ourselves."},
+        {k:"Feel", v:"I resented the extra effort at the time; now I recognise it as the reason I actually understand the subject instead of having memorised it."}
+      ],
+      emphasis:{
+        "A teacher you respect":"What earned my respect specifically was that she never lowered her standards just because a topic was difficult.",
+        "Someone who taught you something":"What she actually taught me was a method — working backward from a mistake — not just chemistry facts.",
+        "A favourite teacher":"She is genuinely the one teacher from that entire period I still remember by name.",
+        "Someone who influenced you":"Her way of approaching problems is something I still catch myself using outside of chemistry entirely.",
+        "A teacher you did not like at first":"I actually found her frustrating in the first few months, before I understood why she was doing it.",
+        "Someone strict who was still fair":"She was strict about effort specifically, never about anything that felt arbitrary or unfair."
+      },
+      vocab:[
+        {term:"a formative influence", meaning:"someone or something that shapes you significantly, especially early on"},
+        {term:"to instil discipline", meaning:"to gradually build a habit of consistent effort in someone"},
+        {term:"exacting", meaning:"demanding great care and precision"},
+        {term:"it stuck with me", meaning:"a phrase for something that had a lasting impression"}
+      ],
+      script:"She turned a subject I was genuinely failing into one I looked forward to, over about two years starting when I was fifteen, in a fairly ordinary classroom with nothing special about the setting itself. What made her different was that she never just gave you the correct answer when you got something wrong — she would make you work backward from the mistake, step by step, until you found exactly where your reasoning had gone wrong. At the time I found that genuinely frustrating, because it was so much slower than just being told the answer, and I remember resenting the extra effort it demanded. It took a good few months before I actually understood why she was doing it. Now, looking back, I recognise it as the reason I actually understand the subject at a deeper level instead of having simply memorised it for a test. I still catch myself using that same approach — working backward from where something went wrong — in situations that have nothing to do with chemistry at all, which is probably the clearest sign of how much that habit actually stuck."
+    },
+    {
+      key:'school', label:'4 · School / College', subject:"a rule we had to follow at school", qtype:'place',
       angle:"Your school or college covers memorable-place, event, competition, rule, and teacher cards almost by default, because it is the one setting you can describe in detail without inventing anything.",
       expand:["Is there a specific competition, celebration, or rule you can center this on?","Which teacher or moment comes with the most concrete detail?","What changed in that place over the time you were there?"],
       covers:["A memorable place","An event that happened there","A competition","A celebration","A rule from school","A favourite teacher","An achievement","Something you learned"],
@@ -1263,11 +1311,11 @@
       ]
     },
     {
-      key:'trip', label:'4 · A Trip', subject:"a road trip I took into the mountains", qtype:'place',
+      key:'trip', label:'5 · A Trip', subject:"a road trip I took into the mountains", qtype:'place',
       angle:"One well-chosen trip answers beautiful place, journey, adventure, holiday, and nature cards simultaneously — the destination barely changes, only which part of the story you foreground.",
       expand:["What was the most difficult or surprising part of getting there?","What is one vivid sensory detail from the destination itself?","Would you go back, and why or why not?"],
       covers:["A beautiful place","The journey there","Where you stayed","An adventure","A holiday","An interesting experience","Nature"],
-      extra:["A holiday you took","A place you would like to visit again"],
+      extra:["A holiday you took","A place you would like to visit again","A tourist place"],
       beats:[
         {k:"Who", v:"travelling with two close friends."},
         {k:"What", v:"a road trip into the mountains."},
@@ -1286,7 +1334,8 @@
         "An interesting experience":"What made it interesting was not the scenery alone, it was how different silence at altitude felt after a lifetime in a city.",
         "Nature":"The scale of the mountains, layered further than I could process, is the clearest nature detail from that trip.",
         "A holiday you took":"Compared to my usual beach holidays, this one barely counts as relaxing, but it is the one that actually stayed with me.",
-        "A place you would like to visit again":"That specific viewpoint above the clouds is exactly where I would go straight back to, given the chance."
+        "A place you would like to visit again":"That specific viewpoint above the clouds is exactly where I would go straight back to, given the chance.",
+        "A tourist place":"It is not a typical tourist spot with crowds or signposts — more of a place people visit by word of mouth than by guidebook."
       },
       vocab:[
         {term:"awe-inspiring", meaning:"causing feelings of great respect and wonder"},
@@ -1296,7 +1345,7 @@
       ]
     },
     {
-      key:'celebration', label:'5 · Birthday / Wedding / Festival', subject:"my cousin's wedding", qtype:'experience',
+      key:'celebration', label:'9 · Birthday / Wedding / Festival', subject:"my cousin's wedding", qtype:'experience',
       angle:"A wedding, birthday, or family gathering you actually attended covers happy-event, celebration, gift, tradition, and memorable-day cards — the event stays fixed, the gift or tradition detail just gets pulled forward.",
       expand:["What made this occasion different from an ordinary day?","Was there a gift, tradition, or ritual worth describing in detail?","Who else was there, and what role did they play in making it memorable?"],
       covers:["A happy event you attended","A family gathering","A celebration you organized","A gift you received","A gift you gave","A traditional event","A memorable day"],
@@ -1329,11 +1378,11 @@
       ]
     },
     {
-      key:'device', label:'6 · Mobile Phone / Laptop', subject:"my laptop", qtype:'object',
+      key:'device', label:'7 · Mobile Phone / Laptop', subject:"my laptop", qtype:'object',
       angle:"A phone or laptop you actually own answers useful-object, expensive-thing, technology, gift, and thing-you-use-daily cards at once — describe how it fits into your routine, not its specs.",
       expand:["What do you actually use it for, day to day?","Was it a gift, or something you saved for and bought yourself?","How would your daily routine change without it?"],
       covers:["A useful object","An expensive thing","A gift you gave or received","A piece of technology","Something you use daily","Something you bought recently"],
-      extra:["A machine you find useful","Something you could not live without"],
+      extra:["A machine you find useful","Something you could not live without","A mobile app you use"],
       beats:[
         {k:"Who", v:"bought for myself, on my father's advice."},
         {k:"What", v:"my laptop."},
@@ -1351,7 +1400,8 @@
         "Something you use daily":"It is genuinely part of my routine every single day, from classes to just checking messages.",
         "Something you bought recently":"I bought it just before starting university, so it is not brand new, but it still feels like a fairly recent purchase.",
         "A machine you find useful":"What I find most useful about it is how it removed the need to juggle a calculator, a scanner, and a slow old desktop.",
-        "Something you could not live without":"If it broke tomorrow, it would honestly disrupt my week more than losing my phone would."
+        "Something you could not live without":"If it broke tomorrow, it would honestly disrupt my week more than losing my phone would.",
+        "A mobile app you use":"It is really the apps on it, more than the hardware itself, that my daily routine actually depends on."
       },
       vocab:[
         {term:"indispensable", meaning:"absolutely necessary, impossible to do without"},
@@ -1361,11 +1411,11 @@
       ]
     },
     {
-      key:'media', label:'7 · Book / Movie / Series', subject:"a novel I read a while back", qtype:'object',
+      key:'media', label:'8 · Book / Movie / Series', subject:"a novel I read a while back", qtype:'object',
       angle:"One book, film, or series you know well covers something-you-learned, something-that-inspired-you, a-recommendation, and free-time-activity cards — the story stays the anchor, the lesson or actor detail moves.",
       expand:["What is the plot detail or character that stuck with you most?","Who recommended it to you, or who did you recommend it to?","What did it change about how you think or act?"],
       covers:["Something you learned from it","Something that inspired you","An interesting story","A recommendation","A free-time activity","An actor / lead character"],
-      extra:["A story you found interesting","Something you watched recently"],
+      extra:["A story you found interesting","Something you watched recently","A book you enjoyed"],
       beats:[
         {k:"Who", v:"recommended to me by a teacher."},
         {k:"What", v:"a novel about a character rebuilding after a failure."},
@@ -1383,7 +1433,8 @@
         "A free-time activity":"I read most of it in short bursts during train journeys, which is not my usual way of reading at all.",
         "An actor / lead character":"The lead character rebuilding his life from almost nothing is really the whole engine of the story.",
         "A story you found interesting":"What made it interesting to me specifically was the timing — I was dealing with something similar in real life.",
-        "Something you watched recently":"This one is actually a novel rather than something I watched, but it has had a similar lasting effect on me."
+        "Something you watched recently":"This one is actually a novel rather than something I watched, but it has had a similar lasting effect on me.",
+        "A book you enjoyed":"I would not call it an easy read, but it is the one book from the last few years I would genuinely recommend."
       },
       vocab:[
         {term:"a compelling narrative", meaning:"a story that holds your attention"},
@@ -1393,11 +1444,11 @@
       ]
     },
     {
-      key:'learning', label:'8 · Learning a Skill', subject:"learning to drive", qtype:'activity',
+      key:'learning', label:'11 · Learning a Skill', subject:"learning to drive", qtype:'activity',
       angle:"Driving, a language, cooking, the gym, or a sport all answer skill-you-learned, challenge, achievement, goal, and daily-routine cards — the skill is the anchor, the difficulty-then-mastery arc is what you reuse.",
       expand:["What made this difficult to learn at first?","How do you use or apply it now, concretely?","What would change if you had never learned it?"],
       covers:["A skill you learned","A challenge you faced","An achievement","A goal","A future plan","A free-time activity","A daily routine activity"],
-      extra:["Something you are still learning","A skill you want to improve"],
+      extra:["Something you are still learning","A skill you want to improve","A hobby"],
       beats:[
         {k:"Who", v:"taught largely by my father, on weekends."},
         {k:"What", v:"learning to drive."},
@@ -1416,7 +1467,8 @@
         "A free-time activity":"The weekend lessons themselves became something closer to a routine than free time, at least while I was learning.",
         "A daily routine activity":"Now driving is just background to my daily routine, which is a big shift from how anxious it once made me.",
         "Something you are still learning":"Driving in heavy traffic is honestly still something I am not fully confident with, even now.",
-        "A skill you want to improve":"If I am honest, my parking still needs work, even though the fear itself is long gone."
+        "A skill you want to improve":"If I am honest, my parking still needs work, even though the fear itself is long gone.",
+        "A hobby":"It was not really framed as a hobby back then, but the weekend lessons ended up becoming something I looked forward to."
       },
       vocab:[
         {term:"a steep learning curve", meaning:"something difficult to learn quickly"},
@@ -1426,11 +1478,11 @@
       ]
     },
     {
-      key:'hometown', label:'9 · Hometown', subject:"an old market near my house", qtype:'place',
+      key:'hometown', label:'6 · Hometown', subject:"an old market near my house", qtype:'place',
       angle:"Your hometown answers favourite-place, place-you-dislike, historical-place, and change-you-witnessed cards, because it is the one place you already know in enough concrete detail to describe without effort.",
       expand:["Which specific building, park, or market can you describe in detail?","Has anything about it changed noticeably over the years?","What would you show a visitor first, and why?"],
       covers:["A place you like","A place you dislike","A building","A park","A market","A historical place","A change you witnessed"],
-      extra:["A shop you often visit","A neighbourhood you know well"],
+      extra:["A shop you often visit","A neighbourhood you know well","A city you know well"],
       beats:[
         {k:"Who", v:"the whole neighbourhood, really."},
         {k:"What", v:"an old market near my house."},
@@ -1449,7 +1501,8 @@
         "A historical place":"It is not historical in any official sense, but my family has used that street for as long as I can remember.",
         "A change you witnessed":"The shift from empty stalls to a crowded, lit-up street over about ten years is the clearest change I have witnessed.",
         "A shop you often visit":"There is one particular food stall there I still visit most weeks, one of the few that has not changed.",
-        "A neighbourhood you know well":"It is the one street in the neighbourhood I could probably describe with my eyes closed."
+        "A neighbourhood you know well":"It is the one street in the neighbourhood I could probably describe with my eyes closed.",
+        "A city you know well":"I would not call it a landmark of the city, but it is the one part of it I could actually give someone a proper tour of."
       },
       vocab:[
         {term:"a far cry from", meaning:"very different from"},
@@ -1463,7 +1516,7 @@
       angle:"One remembered problem — something breaking, a plan falling through — answers difficult-decision, challenge, achievement, teamwork, and something-you-learned cards, because you can shift whether you foreground the fix, the team, or the lesson.",
       expand:["What exactly went wrong, and who else was involved?","What specifically did you do to fix it?","What would have happened if you had not solved it?"],
       covers:["A difficult decision","A challenge you faced","An achievement","Teamwork","Helping somebody","Something you learned"],
-      extra:["A time you helped someone","A mistake you learned from"],
+      extra:["A time you helped someone","A mistake you learned from","A success or failure"],
       beats:[
         {k:"Who", v:"a group project team relying on me."},
         {k:"What", v:"our laptop failed the night before a presentation was due."},
@@ -1481,7 +1534,8 @@
         "Helping somebody":"In this case the people I helped were my own teammates, who would otherwise have had to redo the presentation from memory.",
         "Something you learned":"What I actually took from it is that panicking and solving a problem cannot really happen at the same time.",
         "A time you helped someone":"This is really a story about helping my team specifically, more than solving a personal problem.",
-        "A mistake you learned from":"The real mistake was none of us backing up the file anywhere else in the first place."
+        "A mistake you learned from":"The real mistake was none of us backing up the file anywhere else in the first place.",
+        "A success or failure":"It only counts as a success because of how close it came to being a complete failure a few hours earlier."
       },
       vocab:[
         {term:"to keep a level head", meaning:"to remain calm under pressure"},
@@ -1501,11 +1555,19 @@
   function lowerFirst(s){ return s.charAt(0).toLowerCase() + s.slice(1); }
 
   const QTYPE_LABEL = { person:'Person-based', place:'Place-based', object:'Object-based', experience:'Experience-based', activity:'Activity-based' };
+  const QTYPE_ORDER = ['person','place','object','experience','activity'];
 
   function renderTopicTabs(){
-    topicTabsEl.innerHTML = topics.map(t=>
-      `<button class="topic-tab ${t.key===currentTopic?'active':''}" data-k="${t.key}">${t.label}</button>`
-    ).join('');
+    topicTabsEl.innerHTML = QTYPE_ORDER.map(qtype=>{
+      const group = topics.filter(t=>t.qtype===qtype);
+      if(!group.length) return '';
+      return `
+        <div class="topic-group">
+          <span class="topic-group-label">${QTYPE_LABEL[qtype]}</span>
+          ${group.map(t=>`<button class="topic-tab ${t.key===currentTopic?'active':''}" data-k="${t.key}">${t.label}</button>`).join('')}
+        </div>
+      `;
+    }).join('');
     topicTabsEl.querySelectorAll('.topic-tab').forEach(btn=>{
       btn.addEventListener('click', ()=>{
         currentTopic = btn.dataset.k;
