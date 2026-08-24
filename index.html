@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rumi's IELTS Journey</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +24,8 @@
     --accent-soft:#F6E3DE;
     --card-shadow: 0 1px 2px rgba(28,35,31,0.06), 0 8px 24px -12px rgba(28,35,31,0.18);
     --radius: 14px;
+    --cheat-fg: #FFF8F3;
+    --cheat-accent: #E0A64A;
   }
 
   @media (prefers-color-scheme: dark){
@@ -36,6 +43,7 @@
       --accent-2-soft:#213229;
       --accent-soft:#332420;
       --card-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.55);
+      --cheat-fg: #EDEFE9;
     }
   }
   :root[data-theme="dark"]{
@@ -52,6 +60,7 @@
     --accent-2-soft:#213229;
     --accent-soft:#332420;
     --card-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.55);
+    --cheat-fg: #EDEFE9;
   }
 
   *{box-sizing:border-box;}
@@ -95,6 +104,9 @@
     max-width:1080px;
     margin:0 auto;
     padding:0 24px 120px;
+  }
+  @media (max-width:640px){
+    .page{ padding:0 18px 80px; }
   }
 
   /* ---------- Top nav ---------- */
@@ -168,12 +180,33 @@
     border-radius:999px;
     border:1px solid var(--line);
     color:var(--muted);
+    flex-shrink:0;
   }
   .module-pill.active{
     color:var(--accent);
     border-color:color-mix(in srgb, var(--accent) 40%, transparent);
     background:var(--accent-soft);
     font-weight:600;
+  }
+
+  @media (max-width:640px){
+    .topbar-inner{
+      flex-wrap:nowrap;
+      justify-content:flex-start;
+      gap:0;
+      padding:12px 16px;
+    }
+    .brand{ font-size:0.88rem; flex-shrink:0; white-space:nowrap; }
+    .brand .mark{ width:26px; height:26px; }
+    .topnav{ display:none; }
+    .module-strip{
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      padding:0 16px 12px;
+    }
+    .module-strip::-webkit-scrollbar{ display:none; }
   }
 
   /* ---------- Hero ---------- */
@@ -185,6 +218,10 @@
     align-items:center;
   }
   @media (max-width:760px){ .hero{grid-template-columns:1fr;} }
+  @media (max-width:640px){
+    .hero{ padding:28px 0 20px; gap:28px; }
+    .hero > div:first-child > .eyebrow{ font-size:0.62rem; letter-spacing:0.08em; }
+  }
   .hero h1{
     font-size:clamp(2.1rem, 4.2vw, 3.1rem);
     line-height:1.06;
@@ -216,12 +253,22 @@
     color:var(--ink);
     font-weight:600;
   }
+  @media (max-width:640px){
+    .hero-meta{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:10px;
+      margin-top:20px;
+    }
+    .hero-meta strong{ font-size:1.25rem; }
+  }
 
   /* the literal cue-card motif, stacked & fanned */
   .card-stack{
     position:relative;
     height:230px;
   }
+  @media (max-width:640px){ .card-stack{ height:150px; width:100%; max-width:280px; margin:0 auto; } }
   .fanned-card{
     position:absolute;
     inset:0;
@@ -233,6 +280,11 @@
     border-radius:12px;
     box-shadow:var(--card-shadow);
     padding:20px 22px;
+  }
+  @media (max-width:640px){
+    .fanned-card{ height:120px; padding:14px 16px; }
+    .fanned-card:nth-child(1), .fanned-card:nth-child(2){ display:none; }
+    .fanned-card:nth-child(3){ transform:none; }
   }
   .fanned-card:nth-child(1){ transform:rotate(-7deg) translate(-14px, 6px); z-index:1;}
   .fanned-card:nth-child(2){ transform:rotate(4deg) translate(10px, 0px); z-index:2;}
@@ -260,6 +312,7 @@
     border-top:1px solid var(--line);
   }
   section:first-of-type{border-top:none;}
+  @media (max-width:640px){ section{ padding:40px 0 8px; } }
   .section-head{
     display:flex;
     justify-content:space-between;
@@ -340,8 +393,29 @@
     flex-direction:column;
     gap:8px;
   }
+  .step-row{ position:relative; }
+  .step-row:not(:last-child)::after{
+    content:'';
+    position:absolute;
+    left:29px;
+    top:100%;
+    width:2px;
+    height:8px;
+    background:var(--line);
+  }
+  .step-row.done:not(:last-child)::after{ background:var(--accent-2); }
+  .step-btn-label{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    flex:1;
+  }
+  .step-btn-label em{ display:none; }
+  .step-chev{ display:none; }
+  .step-inline{ display:none; }
   .step-btn{
     position:relative;
+    width:100%;
     text-align:left;
     background:none;
     border:1px solid transparent;
@@ -356,16 +430,6 @@
     font-size:0.94rem;
     transition:background .15s ease, color .15s ease, border-color .15s ease;
   }
-  .step-btn:not(:last-child)::after{
-    content:'';
-    position:absolute;
-    left:29px;
-    top:100%;
-    width:2px;
-    height:8px;
-    background:var(--line);
-  }
-  .step-btn.done:not(:last-child)::after{ background:var(--accent-2); }
   .step-btn .dot{
     width:30px;height:30px;
     border-radius:50%;
@@ -472,6 +536,73 @@
     background:none;
     color:var(--ink-soft);
     border:1px solid var(--line);
+  }
+
+  @media (max-width:640px){
+    .stepper{ display:block; }
+    .step-display{ display:none; }
+    .step-list{ gap:8px; }
+    .step-row:not(:last-child)::after{ display:none; }
+    .step-btn{ padding:13px 12px; border-radius:10px; border:1px solid transparent; background:var(--surface-2); }
+    .step-row.active-row{
+      border:1px solid color-mix(in srgb, var(--accent-2) 40%, transparent);
+      border-radius:12px;
+      background:var(--surface);
+      overflow:hidden;
+    }
+    .step-row.active-row .step-btn{
+      border-radius:0;
+      border-bottom:1px solid color-mix(in srgb, var(--accent-2) 22%, transparent);
+    }
+    .step-btn.active{ box-shadow:none; }
+    .step-btn-label em{
+      display:block;
+      font-style:italic;
+      font-weight:400;
+      font-size:0.82rem;
+      color:var(--ink-soft);
+      margin-top:2px;
+    }
+    .step-chev{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:22px; height:22px;
+      flex-shrink:0;
+      font-size:1rem;
+      color:var(--muted);
+    }
+    .step-inline{
+      display:block;
+      padding:16px 16px 18px;
+    }
+    .step-inline .prompt{
+      font-family:'Fraunces', serif;
+      font-style:italic;
+      color:var(--ink-soft);
+      margin-top:2px;
+    }
+    .step-inline .body{
+      margin-top:12px;
+      color:var(--ink-soft);
+      font-size:0.94rem;
+    }
+    .step-inline .ex{
+      margin-top:14px;
+      padding:14px 16px;
+      background:var(--surface-2);
+      border-radius:10px;
+      border-left:3px solid var(--accent-2);
+      font-size:0.9rem;
+    }
+    .step-inline .ex .k{
+      font-family:'JetBrains Mono', monospace;
+      font-size:0.66rem;
+      text-transform:uppercase;
+      color:var(--accent-2);
+      letter-spacing:0.05em;
+    }
+    .step-inline .step-nav{ margin-top:16px; }
   }
 
   /* ---------- Topic explorer ---------- */
@@ -853,7 +984,7 @@
   .cheat-sheet{
     padding:30px 32px;
     background:var(--ink);
-    color:var(--bg);
+    color:var(--cheat-fg);
     position:relative;
     overflow:hidden;
   }
@@ -875,7 +1006,7 @@
     margin-top:22px;
   }
   @media (max-width:760px){ .cheat-grid{grid-template-columns:1fr;} }
-  .cheat-col .eyebrow{color:var(--accent-2);}
+  .cheat-col .eyebrow{color:var(--cheat-accent);}
   .cheat-col ul{
     list-style:none;
     padding:0;
@@ -891,7 +1022,7 @@
     align-items:baseline;
   }
   .cheat-col input[type=checkbox]{
-    accent-color:var(--accent-2);
+    accent-color:var(--cheat-accent);
     margin-top:3px;
     flex-shrink:0;
   }
@@ -918,7 +1049,7 @@
   .bar-fill{
     height:100%;
     width:0%;
-    background:var(--accent-2);
+    background:var(--cheat-accent);
     transition:width .3s ease;
   }
 
@@ -930,7 +1061,27 @@
     font-size:0.85rem;
     font-family:'JetBrains Mono', monospace;
   }
+
+  /* ---------- Mobile refinements ---------- */
+  @media (max-width:640px){
+    .step-display,
+    .topic-card,
+    .worked-example,
+    .vocab-panel,
+    .technique-card,
+    .stat-card{
+      padding:18px 18px;
+    }
+    .cheat-sheet{ padding:22px 20px; }
+    .section-head{ margin-bottom:18px; }
+    .section-head h2{ font-size:1.4rem; }
+    .callout{ flex-direction:column; gap:8px; padding:16px 18px; }
+    .script-block{ padding:14px 16px; }
+    footer{ margin-top:40px; font-size:0.78rem; }
+  }
 </style>
+</head>
+<body>
 
 <div class="topbar">
   <div class="topbar-inner">
@@ -1148,13 +1299,40 @@
   const stepDisplayEl = document.getElementById('stepDisplay');
 
   function renderStepList(){
-    stepListEl.innerHTML = steps.map((s,i)=>
-      `<button class="step-btn ${i===currentStep?'active':''} ${i<currentStep?'done':''}" data-i="${i}">
-        <span class="dot">${i<currentStep? '✓' : (i+1)}</span> ${s.tag}
-      </button>`
-    ).join('');
+    stepListEl.innerHTML = steps.map((s,i)=>{
+      const isActive = i===currentStep;
+      const isDone = i<currentStep;
+      const inline = isActive ? `
+        <div class="step-inline">
+          <p class="prompt">${s.prompt}</p>
+          <p class="body">${s.body}</p>
+          <div class="ex"><span class="k">Applied example — "my father"</span><br>${s.ex}</div>
+          <div class="step-nav">
+            <button class="ghost" data-nav="prev" ${currentStep===0?'disabled':''}>← Back</button>
+            <button data-nav="next" ${currentStep===steps.length-1?'disabled':''}>Next step →</button>
+          </div>
+        </div>
+      ` : '';
+      return `
+        <div class="step-row ${isDone?'done':''} ${isActive?'active-row':''}">
+          <button class="step-btn ${isActive?'active':''} ${isDone?'done':''}" data-i="${i}">
+            <span class="dot">${isDone? '✓' : (i+1)}</span>
+            <span class="step-btn-label">${s.tag} <em>${s.title}</em></span>
+            <span class="step-chev">${isActive? '−' : '+'}</span>
+          </button>
+          ${inline}
+        </div>
+      `;
+    }).join('');
     stepListEl.querySelectorAll('.step-btn').forEach(btn=>{
       btn.addEventListener('click', ()=>{ currentStep = parseInt(btn.dataset.i); render(); });
+    });
+    stepListEl.querySelectorAll('[data-nav]').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        if(btn.dataset.nav==='prev' && currentStep>0){ currentStep--; render(); }
+        if(btn.dataset.nav==='next' && currentStep<steps.length-1){ currentStep++; render(); }
+      });
     });
   }
 
@@ -1722,3 +1900,5 @@
 
 })();
 </script>
+</body>
+</html>
