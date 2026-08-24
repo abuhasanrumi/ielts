@@ -125,16 +125,11 @@
     font-size:1.05rem;
   }
   .brand .mark{
-    width:28px;height:28px;
-    border-radius:7px;
-    background:var(--accent);
-    color:var(--accent-ink);
+    width:30px;height:30px;
     display:flex;align-items:center;justify-content:center;
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.8rem;
-    font-weight:600;
-    transform:rotate(-4deg);
+    flex-shrink:0;
   }
+  .brand .mark svg{ width:100%; height:100%; overflow:visible; }
   .topnav{
     display:flex;
     gap:4px;
@@ -514,7 +509,18 @@
   .topic-card{
     padding:24px 26px;
   }
-  .topic-card h3{font-size:1.25rem;}
+  .topic-card h3{font-size:1.25rem; margin-top:8px;}
+  .qtype-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.66rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    padding:4px 9px;
+    border-radius:999px;
+    border:1px solid color-mix(in srgb, var(--accent-2) 35%, transparent);
+    color:var(--accent-2);
+    white-space:nowrap;
+  }
   .topic-card .angle{
     margin-top:10px;
     color:var(--ink-soft);
@@ -910,7 +916,19 @@
 
 <div class="topbar">
   <div class="topbar-inner">
-    <div class="brand"><span class="mark">RJ</span> Rumi's IELTS Journey</div>
+    <div class="brand">
+      <span class="mark">
+        <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g transform="rotate(-6 13 13)">
+            <rect x="3" y="5" width="20" height="16" rx="3" style="fill:var(--accent)"/>
+            <path d="M17 5 L23 5 L23 11 Z" style="fill:var(--accent-2)"/>
+            <line x1="7" y1="12" x2="17" y2="12" style="stroke:var(--accent-ink)" stroke-width="1.4" stroke-linecap="round" opacity="0.9"/>
+            <line x1="7" y1="16" x2="14" y2="16" style="stroke:var(--accent-ink)" stroke-width="1.4" stroke-linecap="round" opacity="0.65"/>
+          </g>
+        </svg>
+      </span>
+      Rumi's IELTS Journey
+    </div>
     <nav class="topnav">
       <a href="#overview">Overview</a>
       <a href="#framework">Framework</a>
@@ -921,7 +939,7 @@
     </nav>
   </div>
   <div class="module-strip">
-    <span class="module-pill active">Speaking · Part 2</span>
+    <span class="module-pill active">Speaking</span>
     <span class="module-pill">Listening — soon</span>
     <span class="module-pill">Reading — soon</span>
     <span class="module-pill">Writing — soon</span>
@@ -1147,7 +1165,7 @@
   // The ten idea-banks in the order given in the video.
   const topics = [
     {
-      key:'family', label:'1 · Family Member', subject:"my father",
+      key:'family', label:'1 · Family Member', subject:"my father", qtype:'person',
       angle:"Fix one real family member in mind before the exam. Almost every person-based card — helpful, admired, intelligent, successful, someone who taught you something — can be answered with the same one person, just re-angled.",
       expand:["What is one specific thing they did that shows this quality?","What do you admire, or what did they teach you, concretely?","How has knowing them changed how you act?"],
       covers:["A helpful person","Someone you admire","Someone intelligent","Someone successful","Someone who taught you something","Someone you spend time with"],
@@ -1179,7 +1197,7 @@
       ]
     },
     {
-      key:'friend', label:'2 · Best Friend', subject:"my closest friend from university",
+      key:'friend', label:'2 · Best Friend', subject:"my closest friend from university", qtype:'person',
       angle:"Your best friend is the most flexible idea-bank you own — funny, honest, motivating, creative, someone you enjoy talking to all point back to the same person. Nobody fact-checks the exam; shade the truth if it makes the story cleaner.",
       expand:["What specific moment shows this trait, rather than just stating it?","How did meeting them or growing close happen?","What would be different if you had not met them?"],
       covers:["A funny person","An honest person","Someone who motivated you","A creative person","Someone you met recently","Someone you enjoy talking to"],
@@ -1211,7 +1229,7 @@
       ]
     },
     {
-      key:'school', label:'3 · School / College', subject:"a rule we had to follow at school",
+      key:'school', label:'3 · School / College', subject:"a rule we had to follow at school", qtype:'place',
       angle:"Your school or college covers memorable-place, event, competition, rule, and teacher cards almost by default, because it is the one setting you can describe in detail without inventing anything.",
       expand:["Is there a specific competition, celebration, or rule you can center this on?","Which teacher or moment comes with the most concrete detail?","What changed in that place over the time you were there?"],
       covers:["A memorable place","An event that happened there","A competition","A celebration","A rule from school","A favourite teacher","An achievement","Something you learned"],
@@ -1245,7 +1263,7 @@
       ]
     },
     {
-      key:'trip', label:'4 · A Trip', subject:"a road trip I took into the mountains",
+      key:'trip', label:'4 · A Trip', subject:"a road trip I took into the mountains", qtype:'place',
       angle:"One well-chosen trip answers beautiful place, journey, adventure, holiday, and nature cards simultaneously — the destination barely changes, only which part of the story you foreground.",
       expand:["What was the most difficult or surprising part of getting there?","What is one vivid sensory detail from the destination itself?","Would you go back, and why or why not?"],
       covers:["A beautiful place","The journey there","Where you stayed","An adventure","A holiday","An interesting experience","Nature"],
@@ -1278,7 +1296,7 @@
       ]
     },
     {
-      key:'celebration', label:'5 · Birthday / Wedding / Festival', subject:"my cousin's wedding",
+      key:'celebration', label:'5 · Birthday / Wedding / Festival', subject:"my cousin's wedding", qtype:'experience',
       angle:"A wedding, birthday, or family gathering you actually attended covers happy-event, celebration, gift, tradition, and memorable-day cards — the event stays fixed, the gift or tradition detail just gets pulled forward.",
       expand:["What made this occasion different from an ordinary day?","Was there a gift, tradition, or ritual worth describing in detail?","Who else was there, and what role did they play in making it memorable?"],
       covers:["A happy event you attended","A family gathering","A celebration you organized","A gift you received","A gift you gave","A traditional event","A memorable day"],
@@ -1311,7 +1329,7 @@
       ]
     },
     {
-      key:'device', label:'6 · Mobile Phone / Laptop', subject:"my laptop",
+      key:'device', label:'6 · Mobile Phone / Laptop', subject:"my laptop", qtype:'object',
       angle:"A phone or laptop you actually own answers useful-object, expensive-thing, technology, gift, and thing-you-use-daily cards at once — describe how it fits into your routine, not its specs.",
       expand:["What do you actually use it for, day to day?","Was it a gift, or something you saved for and bought yourself?","How would your daily routine change without it?"],
       covers:["A useful object","An expensive thing","A gift you gave or received","A piece of technology","Something you use daily","Something you bought recently"],
@@ -1343,7 +1361,7 @@
       ]
     },
     {
-      key:'media', label:'7 · Book / Movie / Series', subject:"a novel I read a while back",
+      key:'media', label:'7 · Book / Movie / Series', subject:"a novel I read a while back", qtype:'object',
       angle:"One book, film, or series you know well covers something-you-learned, something-that-inspired-you, a-recommendation, and free-time-activity cards — the story stays the anchor, the lesson or actor detail moves.",
       expand:["What is the plot detail or character that stuck with you most?","Who recommended it to you, or who did you recommend it to?","What did it change about how you think or act?"],
       covers:["Something you learned from it","Something that inspired you","An interesting story","A recommendation","A free-time activity","An actor / lead character"],
@@ -1375,7 +1393,7 @@
       ]
     },
     {
-      key:'learning', label:'8 · Learning a Skill', subject:"learning to drive",
+      key:'learning', label:'8 · Learning a Skill', subject:"learning to drive", qtype:'activity',
       angle:"Driving, a language, cooking, the gym, or a sport all answer skill-you-learned, challenge, achievement, goal, and daily-routine cards — the skill is the anchor, the difficulty-then-mastery arc is what you reuse.",
       expand:["What made this difficult to learn at first?","How do you use or apply it now, concretely?","What would change if you had never learned it?"],
       covers:["A skill you learned","A challenge you faced","An achievement","A goal","A future plan","A free-time activity","A daily routine activity"],
@@ -1408,7 +1426,7 @@
       ]
     },
     {
-      key:'hometown', label:'9 · Hometown', subject:"an old market near my house",
+      key:'hometown', label:'9 · Hometown', subject:"an old market near my house", qtype:'place',
       angle:"Your hometown answers favourite-place, place-you-dislike, historical-place, and change-you-witnessed cards, because it is the one place you already know in enough concrete detail to describe without effort.",
       expand:["Which specific building, park, or market can you describe in detail?","Has anything about it changed noticeably over the years?","What would you show a visitor first, and why?"],
       covers:["A place you like","A place you dislike","A building","A park","A market","A historical place","A change you witnessed"],
@@ -1441,7 +1459,7 @@
       ]
     },
     {
-      key:'problem', label:'10 · A Problem You Solved', subject:"a time our team's laptop failed the night before a presentation",
+      key:'problem', label:'10 · A Problem You Solved', subject:"a time our team's laptop failed the night before a presentation", qtype:'experience',
       angle:"One remembered problem — something breaking, a plan falling through — answers difficult-decision, challenge, achievement, teamwork, and something-you-learned cards, because you can shift whether you foreground the fix, the team, or the lesson.",
       expand:["What exactly went wrong, and who else was involved?","What specifically did you do to fix it?","What would have happened if you had not solved it?"],
       covers:["A difficult decision","A challenge you faced","An achievement","Teamwork","Helping somebody","Something you learned"],
@@ -1482,6 +1500,8 @@
 
   function lowerFirst(s){ return s.charAt(0).toLowerCase() + s.slice(1); }
 
+  const QTYPE_LABEL = { person:'Person-based', place:'Place-based', object:'Object-based', experience:'Experience-based', activity:'Activity-based' };
+
   function renderTopicTabs(){
     topicTabsEl.innerHTML = topics.map(t=>
       `<button class="topic-tab ${t.key===currentTopic?'active':''}" data-k="${t.key}">${t.label}</button>`
@@ -1505,7 +1525,10 @@
 
     topicPanelEl.innerHTML = `
       <div class="panel topic-card">
-        <span class="eyebrow">Angle</span>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+          <span class="eyebrow">Angle</span>
+          <span class="qtype-tag">${QTYPE_LABEL[t.qtype]}</span>
+        </div>
         <h3>${t.label}</h3>
         <p class="angle">${t.angle}</p>
         <ul class="expand-list">
